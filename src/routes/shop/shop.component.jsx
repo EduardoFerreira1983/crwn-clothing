@@ -8,7 +8,8 @@ const Shop = () => {
             <div>
                 Hi shop
             </div>
-        </div>
+        </div> 
+
     );
     
 }

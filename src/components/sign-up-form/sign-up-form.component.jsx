@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import FormInput from "../form-input/form-input.component";
 import './sign-up-form.styles.scss'
 import Button from "../button/button.component";
+
+import { UserContext } from "../contexts/user.context";
+
 
 import {
     createAuthUserWithEmailAndPassword, createUserDocumentFromAuth
@@ -20,6 +23,8 @@ const SignUpForm = () => {
     
     const { displayName, email, password, confirmPassword } = formFields;
 
+    const { setCurrentUser } = useContext( UserContext );
+
     const handleSubmit = async ( event ) => {
         event.preventDefault();
         // confirm datas from sign 
@@ -31,6 +36,7 @@ const SignUpForm = () => {
         try {
             const { user } = await createAuthUserWithEmailAndPassword( email, password );
             
+            setCurrentUser( user );
             await createUserDocumentFromAuth( user, { displayName } );
             resetFormFields();
 
@@ -54,7 +60,7 @@ const SignUpForm = () => {
 
     return (
         <div className="sign-up-container">
-            <h2>I do not have account</h2>
+            <h2>Don't have an account?</h2>
             <span>Sign with your email and password</span>
             <form onSubmit={ handleSubmit }>
                 
@@ -90,7 +96,7 @@ const SignUpForm = () => {
                     value={ confirmPassword }
                 />
 
-                <Button button_type ="inverted"type="submit">
+                <Button type="submit">
                     Sign Up
                 </Button>
 

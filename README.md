@@ -11,4 +11,6 @@ Today the time for studies is small its because is sunday and father's day. I st
 
 In the final of the day I finished the login authentication with firebase, for this case was needed to learn React Context and another functions from firebase. The entire structure and the logics is simple, but the sintax and the new features from  react and javascript in this moment is my bigger problem. 
 
-## 
+## Sixth day
+
+The day starts very nicely,  my studies began drilling the darkness walls  understand more deeply the concepts about React Context and data flow from react. The ZTM course is immersive and challenging, those's explainations is concise and faster. Now it's 13:52 pm. 

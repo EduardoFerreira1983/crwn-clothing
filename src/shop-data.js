@@ -112,6 +112,7 @@ const SHOP_DATA = [
     ],
   },
   {
+    id: 3,
     title: 'Jackets',
     items: [
       {
@@ -147,6 +148,7 @@ const SHOP_DATA = [
     ],
   },
   {
+    id: 4,
     title: 'Womens',
     items: [
       {
@@ -194,6 +196,7 @@ const SHOP_DATA = [
     ],
   },
   {
+    id: 5,
     title: 'Mens',
     items: [
       {
@@ -235,6 +238,5 @@ const SHOP_DATA = [
     ],
   },
 ];
-
 
 export default SHOP_DATA;

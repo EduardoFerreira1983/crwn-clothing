@@ -1,34 +1,22 @@
-import { useContext, Fragment } from "react";
-import './shop.styles.scss';
-import ProductCard from "../../components/product-card/product-card.component";
+import { useContext } from 'react';
 
-import { CategoriesContext } from "../../contexts/categories.context"
+import CategoryPreview from '../../components/category-preview/category-preview.component';
+
+import { CategoriesContext } from '../../contexts/categories.context';
+
+import './shop.styles.scss';
 
 const Shop = () => {
   const { categoriesMap } = useContext(CategoriesContext);
-  const CATEGORIES_KEYS = ['jackets', 'hats', 'mens', 'sneakers', 'womens'];
- 
+
   return (
-    <Fragment>
-      {Object.keys(categoriesMap).map((title, id) => {
-        if (CATEGORIES_KEYS.includes(title)) {
-          return (
-            <Fragment key={id}>
-              <h2>{title}</h2>
- 
-              <div className='products-container'>
-                {categoriesMap[title].map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            </Fragment>
-          );
-        }
-        return false; // optional in my opinion
+    <div className='shop-container'>
+      {Object.keys(categoriesMap).map((key) => {
+        const products = categoriesMap[key];
+        return <CategoryPreview key={key} title={key} products={products} />;
       })}
-    </Fragment>
+    </div>
   );
 };
-
 
 export default Shop;

@@ -1,5 +1,4 @@
 import { initializeApp } from 'firebase/app';
-
 import {
   getAuth,
   signInWithRedirect,
@@ -8,18 +7,17 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
 } from 'firebase/auth';
-
 import {
   getFirestore,
   doc,
   getDoc,
+  getDocs,
   setDoc,
   collection,
   writeBatch,
   query,
-  getDocs
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -30,9 +28,8 @@ const firebaseConfig = {
   messagingSenderId: "251088915245",
   appId: "1:251088915245:web:63040c1fb254f9561f21a4"
 };
- 
 
-initializeApp( firebaseConfig );
+const firebaseApp = initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -41,46 +38,47 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
-
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
-
 export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
 
-export const addCollectionAndDocuments = async ( collectionKey, objectsToAdd ) => {
-  const collectionRef = collection( db, collectionKey ); // make a structure for collection
-  const batch = writeBatch( db );
-  
-  objectsToAdd.forEach( ( object ) => { // add a specific item into a collection
-    const docRef = doc( collectionRef, object.title.toLowerCase() );
-    batch.set( docRef, object );
-  } );
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const batch = writeBatch(db);
+  const collectionRef = collection(db, collectionKey);
+
+  objectsToAdd.forEach(async (object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
 
   await batch.commit();
-  console.log( 'done' );
-  
-}
+  console.log('done');
+};
 
 export const getCategoriesAndDocuments = async () => {
-  const collectionRef = collection( db, 'categories' ); 
-  const q = query( collectionRef ); 
-  
-  const querySnapshot = await getDocs( q );
+  const collectionRef = collection(db, 'categories');
+  const q = query(collectionRef);
 
-  const categoryMap = querySnapshot.docs.reduce( ( acc, docSnapshot ) => {
+  const querySnapshot = await getDocs(q);
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
     const { title, items } = docSnapshot.data();
-    acc[ title.toLowerCase() ] = items;
+    acc[title.toLowerCase()] = items;
     return acc;
-  } )
+  }, {});
 
   return categoryMap;
-}
+};
 
-
-export const createUserDocumentFromAuth = async( userAuth, additionalInformation = {} ) => {
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalInformation = {}
+) => {
   if (!userAuth) return;
 
   const userDocRef = doc(db, 'users', userAuth.uid);
@@ -106,18 +104,19 @@ export const createUserDocumentFromAuth = async( userAuth, additionalInformation
   return userDocRef;
 };
 
-export const createAuthUserWithEmailAndPassword = async( email, password ) => {
-  if ( !email || !password ) return;
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
 
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 
-export const signInAuthUserWithEmailAndPassword = async( email, password ) => {
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
-  return await signInWithEmailAndPassword( auth, email, password );
+  return await signInWithEmailAndPassword(auth, email, password);
 };
 
-export const signOutUser = async () => await signOut( auth );
+export const signOutUser = async () => await signOut(auth);
 
-export const onAuthUserStateChanged = ( callback ) => onAuthStateChanged ( auth, callback );
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);

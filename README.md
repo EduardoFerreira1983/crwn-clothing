@@ -38,6 +38,6 @@ The content from the course it's longer and high level.  I present a list with t
   - Hooks and states
   - Async functions - promises and fetching.
 
+## Eleventh
 
-
-
+Today I study styled components. The task was changed the entire application 

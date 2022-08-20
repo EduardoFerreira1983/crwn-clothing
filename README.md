@@ -1,4 +1,4 @@
-# Fourth day
+## Fourth day
 I made progress and started with Routes from React and it works  very well.
 
 In the afternoon I started working on firebase. First we connected to DB (Data Base) and did a login with google authentication.
@@ -21,3 +21,23 @@ Rest day, I just finished the project.
 ## Eighth day
 
 After finished the Checkout part, today I wanna studies belong stuffs in the "back end part" like connections with firebase, fetching. Let's go!
+After Lose a lot of time with a problem between Objects and Arrays; I learn about myself, when the problem comes I need choose the better and faster solution.
+
+## Ninth Day 
+
+I feel like a impostor, because I don't have basic skills when  need's to do simple work with programming and I don't feel much confident in this moment. I need find strongest in myself and go ahead, when look up to the past and the job was did it's regular or medium. 
+
+## Tenth
+In this particular day we finished the complete structure to the web commerce, was done a lot of work and lot of complicated instructions from react. The syntax is very different of the I know and familiarized. I need to do a lot of studies an practices for solidified my skills in React and Javascript.
+The content from the course it's longer and high level.  I present a list with the most important items until now.
+
+  - React Context
+  - React Routes/Link/Route / Outlet
+  - Firebase 
+  - Styled Components
+  - Hooks and states
+  - Async functions - promises and fetching.
+
+
+
+
